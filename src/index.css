@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Plus Jakarta Sans", "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  /* Muted tan — primary accent used across the layout */
+  --color-brand-50: #faf6f0;
+  --color-brand-100: #f1e9dd;
+  --color-brand-200: #e3d3bd;
+  --color-brand-300: #d0b896;
+  --color-brand-400: #bc9c71;
+  --color-brand-500: #aa8757;
+  --color-brand-600: #967444;
+  --color-brand-700: #7c5f38;
+  --color-brand-800: #644c2e;
+  --color-brand-900: #513e27;
+
+  /* Espresso — the big CTA banner surface */
+  --color-espresso-500: #57483d;
+  --color-espresso-600: #453931;
+  --color-espresso-700: #362c25;
+
+  --animate-marquee: marquee 42s linear infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+html {
+  scroll-padding-top: 5.5rem;
+}
+
+body {
+  @apply bg-white text-stone-900 antialiased;
+  /* Thin-lined check pattern behind the whole page; sections with a solid
+     background paint over it, tinted bands let it show through. */
+  background-image:
+    linear-gradient(to right, rgb(69 57 49 / 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(69 57 49 / 0.05) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+::selection {
+  @apply bg-brand-600/20;
+}
+
+/* Scroll-reveal helper — toggled by the <Reveal> component */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .animate-marquee {
+    animation: none;
+  }
+}
